@@ -1,0 +1,7 @@
+{
+    "iterations": 5,
+    "connectionSettings": "Server=.;Database=SampleDB;Trusted_Connection=yes",
+    "tests": [{
+        "query": "SELECT TOP 100 * FROM dbo.Users"
+    }]
+}
