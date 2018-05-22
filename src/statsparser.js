@@ -1,3 +1,4 @@
+'use strict';
 const rowEnum = {
     None: 0,
     IO: 1,

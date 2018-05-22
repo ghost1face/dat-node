@@ -1,14 +1,4 @@
-
-// function runTest(test, connectionPool, sqlDriver) {
-//     const request = new sqlDriver.Request(connectionPool);
-//
-//     request.on('info')
-// }
-//
-// function handleInfoMessage() {
-//
-// }
-
+'use strict';
 const queryPreset = 'SET STATISTICS TIME ON; SET STATISTICS IO ON;';
 
 class SessionTest {

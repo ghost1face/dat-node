@@ -1,0 +1,4 @@
+## gitattributes
+* text=auto
+
+## anything not specified below will be handled above

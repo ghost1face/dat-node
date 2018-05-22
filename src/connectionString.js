@@ -1,3 +1,4 @@
+'use strict';
 const connectionParser = require('mssql/lib/connectionstring');
 
 function splitConnectionString(connectionString) {
