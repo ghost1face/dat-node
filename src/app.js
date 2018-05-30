@@ -2,18 +2,24 @@
 const versionNumber = require('../package.json').version;
 
 const argv = require('yargs')
+    .usage('Usage: dat-node -c [configPath] -p [[plugin] [plugin]...]')
     .alias('c', 'configPath')
     .describe('c', 'Path to configuration file to execute test')
     .demandOption(['c'])
-    .version(versionNumber)
+    .nargs('c', 1)
+    .alias('p', 'plugins')
+    .describe('p', 'Plugins to use for test execution')
+    .array('p')
     .alias('v', 'version')
     .help('h')
     .alias('h', 'help')
+    .version(versionNumber)
     .epilog('copyright 2018')
     .argv;
 
 const fs = require('fs')
 const path = require('path');
+const resolvePlugins = require('./pluginloader');
 const runDat = require('../index');
 
 function fileExists(path) {
@@ -32,8 +38,17 @@ function fileExists(path) {
     });
 }
 
-(async function () {
+function loadPlugins(pluginPaths) {
+    if (!pluginPaths || !pluginPaths.length)
+        return [];
 
+    let x = pluginPaths.map(pl => resolvePlugins(pl));
+    debugger;
+    return x;
+}
+
+// main
+(async function () {
     try {
         const absoluteConfigPath = path.resolve(argv.configPath);
 

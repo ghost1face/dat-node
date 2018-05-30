@@ -5,8 +5,10 @@ function tryRequire(pluginNameOrPath) {
     try {
         resolved = require(pluginNameOrPath);
     }
-    catch {
+    catch (ex) {
+
     }
+
     return resolved;
 }
 
