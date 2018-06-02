@@ -1,12 +1,12 @@
-const { compile } = require('nexe')
+const {compile} = require('nexe')
 
 return compile({
-    input: './src/app.js',
-    output: './lib/dat',
-    name: 'dat'
+   input: './src/app.js',
+   output: './lib/dat',
+   name: 'dat'
 }).then(() => {
-    console.log('success')
+   console.log('success')
 })
-.catch(err => {
-    console.log(err);
-})
+   .catch(err => {
+      console.log(err);
+   })

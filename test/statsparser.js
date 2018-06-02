@@ -3,10 +3,10 @@ const assert = require('assert');
 
 
 describe('Statistics parser', function () {
-    let infoMessage;
+   let infoMessage;
 
-    before(function () {
-        infoMessage = `SQL Server parse and compile time: 
+   before(function () {
+      infoMessage = `SQL Server parse and compile time: 
    CPU time = 108 ms, elapsed time = 108 ms.
 
 (13431682 row(s) affected)
@@ -39,26 +39,26 @@ SQL Server parse and compile time:
  SQL Server Execution Times:
    CPU time = 0 ms,  elapsed time = 0 ms.
 `;
-    });
+   });
 
-    it('Parses stats', function () {
-        let stats = parseStats(infoMessage);
+   it('Parses stats', function () {
+      let stats = parseStats(infoMessage);
 
-        assert(stats != null);
-    });
+      assert(stats != null);
+   });
 
-    it('Rolls IO totals properly');
+   it('Rolls IO totals properly');
 
-    it('Rolls time properly');
+   it('Rolls time properly');
 
-    it('Parses other stats', function () {
-        let msg = `
+   it('Parses other stats', function () {
+      let msg = `
  SQL Server Execution Times:
    CPU time = 0 ms,  elapsed time = 0 ms.
 Table 'Users'. Scan count 1, logical reads 2, physical reads 0, read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob read-ahead reads 0.`;
 
-        let stats = parseStats(msg);
+      let stats = parseStats(msg);
 
-        assert(stats != null);
-    });
+      assert(stats != null);
+   });
 });

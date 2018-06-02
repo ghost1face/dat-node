@@ -1,9 +1,9 @@
-module.exports  = {
-    onResult: function() {
+module.exports = {
+   onResult: function () {
 
-    },
+   },
 
-    onTestComplete: function() {
+   onTestComplete: function () {
 
-    }
+   }
 }

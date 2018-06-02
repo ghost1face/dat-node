@@ -1,25 +1,25 @@
 {
-  "name": "dat-node",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "node ./build/build.js",
-    "test": "test"
-  },
-  "bin": {
-    "dat": "./cli/index.js"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "msnodesqlv8": "^0.6.3",
-    "mssql": "https://github.com/ghost1face/node-mssql/tarball/info-message",
-    "threads": "^0.11.0",
-    "yargs": "^11.0.0"
-  },
-  "devDependencies": {
-    "mocha": "^5.1.1",
-    "nexe": "^2.0.0-rc.28"
-  }
+   "name": "dat-node",
+   "version": "0.0.1",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "build": "node ./build/build.js",
+      "test": "test"
+   },
+   "bin": {
+      "dat": "./cli/index.js"
+   },
+   "author": "",
+   "license": "MIT",
+   "dependencies": {
+      "msnodesqlv8": "^0.6.3",
+      "mssql": "https://github.com/ghost1face/node-mssql/tarball/info-message",
+      "threads": "^0.11.0",
+      "yargs": "^11.0.0"
+   },
+   "devDependencies": {
+      "mocha": "^5.1.1",
+      "nexe": "^2.0.0-rc.28"
+   }
 }

@@ -8,84 +8,84 @@ const SessionTest = require('./sessionTest');
 // TODO: what is the format of our config file/command args
 // TODO: What parameters are required?
 class Session {
-    constructor(config) {
-        let cfg = Object.assign({}, {
-            iterations: 20,
-            threads: 1
-        }, config);
+   constructor(config) {
+      let cfg = Object.assign({}, {
+         iterations: 20,
+         threads: 1
+      }, config);
 
-        if (!cfg.tests || !cfg.tests.length)
-            throw Error('No tests available to run.');
+      if (!cfg.tests || !cfg.tests.length)
+         throw Error('No tests available to run.');
 
-        // TODO: Resolve queries to determine if it is a query or a path
+      // TODO: Resolve queries to determine if it is a query or a path
 
-        cfg.connectionSettings = this._resolveConnection(cfg.connectionSettings);
+      cfg.connectionSettings = this._resolveConnection(cfg.connectionSettings);
 
-        this.config = cfg;
-    }
+      this.config = cfg;
+   }
 
-    execute() {
-        const driver = this._resolveDriver();
-        const cfg = this.config;
+   execute() {
+      const driver = this._resolveDriver();
+      const cfg = this.config;
 
-        let executionPromise = Promise.resolve();
-        let pool;
+      let executionPromise = Promise.resolve();
+      let pool;
 
-        this.sessionResults = [];
-        this.pool = pool = new driver.ConnectionPool(this.config.connectionSettings);
+      this.sessionResults = [];
+      this.pool = pool = new driver.ConnectionPool(this.config.connectionSettings);
 
-        pool.on('debug', (connection, message) => {
-            console.debug(message);
-        });
+      pool.on('debug', (connection, message) => {
+         console.debug(message);
+      });
 
-        pool.on('error', err => {
+      pool.on('error', err => {
+         console.error(err);
+      });
+
+      return pool.connect().then(conPool => {
+         cfg.tests.forEach(test => {
+            for (let i = 0; i < cfg.iterations; i++) {
+               let sessionTest = new SessionTest(test, conPool, driver);
+               this.sessionResults.push(sessionTest);
+
+               executionPromise = executionPromise.then(sessionTest.runTest);
+            }
+         });
+
+         return executionPromise;
+      })
+         .catch(err => {
             console.error(err);
-        });
+         });
 
-        return pool.connect().then(conPool => {
-            cfg.tests.forEach(test => {
-                for (let i = 0; i < cfg.iterations; i++) {
-                    let sessionTest = new SessionTest(test, conPool, driver);
-                    this.sessionResults.push(sessionTest);
+   }
 
-                    executionPromise = executionPromise.then(sessionTest.runTest);
-                }
-            });
+   close() {
+      return this.pool.close()
+         .catch(err => console.error(err));
+   }
 
-            return executionPromise;
-        })
-            .catch(err => {
-                console.error(err);
-            });
+   _resolveQuery() {
 
-    }
+   }
 
-    close() {
-        return this.pool.close()
-            .catch(err => console.error(err));
-    }
+   _resolveConnection(connectionStringOrObject) {
+      if (!connectionStringOrObject || typeof connectionStringOrObject === 'undefined')
+         throw Error('No connection string found.');
 
-    _resolveQuery() {
+      return resolveConnectionString(connectionStringOrObject);
+   }
 
-    }
+   _resolveDriver() {
+      let sql;
+      const cfg = this.config;
+      if (cfg && cfg.connectionSettings && cfg.connectionSettings.options && cfg.connectionSettings.options.driver === 'msnodesqlv8')
+         sql = require('mssql/msnodesqlv8');
+      else
+         sql = require('mssql');
 
-    _resolveConnection(connectionStringOrObject) {
-        if (!connectionStringOrObject || typeof connectionStringOrObject === 'undefined')
-            throw Error('No connection string found.');
-
-        return resolveConnectionString(connectionStringOrObject);
-    }
-
-    _resolveDriver() {
-        let sql;
-        const cfg = this.config;
-        if (cfg && cfg.connectionSettings && cfg.connectionSettings.options && cfg.connectionSettings.options.driver === 'msnodesqlv8')
-            sql = require('mssql/msnodesqlv8');
-        else
-            sql = require('mssql');
-
-        return sql;
-    }
+      return sql;
+   }
 }
 
 module.exports = Session;

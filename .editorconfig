@@ -1,9 +1,17 @@
 # top-most EditorConfig file
 root = true
 
+[package*.json]
+charset = ignore
+indent_size = ignore
+indent_style = ignore
+end_of_line = ignore
+insert_final_newline = ignore
+trim_trailing_whitespace = ignore
+
 [*.{js,json}]
 charset = utf-8
 indent_style = space
-indent_size = 2
+indent_size = 3
 trim_trailing_whitespace = true
 insert_final_newline = true

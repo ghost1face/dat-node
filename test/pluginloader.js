@@ -2,21 +2,21 @@ const assert = require('assert');
 const pluginLoader = require('../src/pluginloader');
 
 describe('Plugin loader', function () {
-    it('Loads module from relative path', function () {
-        const resolvedFunction = pluginLoader('../src/pluginLoader');
+   it('Loads module from relative path', function () {
+      const resolvedFunction = pluginLoader('../src/pluginLoader');
 
-        assert(resolvedFunction != null);
-    });
+      assert(resolvedFunction != null);
+   });
 
-    it('Loads module from node_modules', function() {
-       const resolved = pluginLoader('fs');
+   it('Loads module from node_modules', function () {
+      const resolved = pluginLoader('fs');
 
-       assert(resolved != null)
-    });
+      assert(resolved != null)
+   });
 
-    it('Loads modules from plugins directory', function () {
-        const resolvedFunction = pluginLoader('console-output');
+   it('Loads modules from plugins directory', function () {
+      const resolvedFunction = pluginLoader('console-output');
 
-        assert(resolvedFunction != null);
-    });
+      assert(resolvedFunction != null);
+   });
 });

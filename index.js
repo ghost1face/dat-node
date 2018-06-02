@@ -16,25 +16,25 @@ const parseStats = require('./src/statsparser');
 //     }]
 // };
 
-const runDat = function(config) {
-    const session = new Session(config);
+const runDat = function (config) {
+   const session = new Session(config);
 
-    return session.execute()
-        .then(_ => {
-            debugger;
-            let stats = session.sessionResults.map(sr => {
-                return parseStats(sr.msgs.join('\n'));
-            });
+   return session.execute()
+      .then(_ => {
+         debugger;
+         let stats = session.sessionResults.map(sr => {
+            return parseStats(sr.msgs.join('\n'));
+         });
 
-            // todo: proper output
-            console.log(session.sessionResults.map(sr => sr.msgs.join('\n')).join('\n\n'));
+         // todo: proper output
+         console.log(session.sessionResults.map(sr => sr.msgs.join('\n')).join('\n\n'));
 
-            return session.close();
-        })
-        .catch(err => {
-            return session.close();
-        })
-        .then(_ => session);
+         return session.close();
+      })
+      .catch(err => {
+         return session.close();
+      })
+      .then(_ => session);
 }
 
 module.exports = runDat;
