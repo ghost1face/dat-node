@@ -23,7 +23,7 @@ describe('Running dat', function () {
 
     describe('Valid configuration', function () {
         describe('No iteration provided', function () {
-            it('Uses default iterations', async function() {
+            it('Uses default iterations', async function () {
                 let config = Object.assign({}, baseConfig);
                 delete config.iterations;
 
