@@ -7,6 +7,7 @@
 
 const Session = require('./src/session');
 const parseStats = require('./src/statsparser');
+const fakeResultsWriterPlugin = require('./plugins/SimpleConsoleResultsWriter');
 
 // const config = {
 //     iterations: 5,
@@ -18,7 +19,6 @@ const parseStats = require('./src/statsparser');
 
 const runDat = function(config) {
     const session = new Session(config);
-
     return session.execute()
         .then(_ => {
             debugger;
@@ -26,9 +26,8 @@ const runDat = function(config) {
                 return parseStats(sr.msgs.join('\n'));
             });
 
-            // todo: proper output
-            console.log(session.sessionResults.map(sr => sr.msgs.join('\n')).join('\n\n'));
-
+            fakeResultsWriterPlugin(session.sessionResults, stats);
+    
             return session.close();
         })
         .catch(err => {
