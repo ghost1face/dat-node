@@ -2,3 +2,5 @@
 * text=auto
 
 ## anything not specified below will be handled above
+*.sh      eol=lf
+*.conf    eol=lf
