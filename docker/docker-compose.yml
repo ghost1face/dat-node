@@ -1,0 +1,6 @@
+version: '3'
+services:
+  sql:
+    ports:
+    - "1433:1433"
+    image: "datimage:latest"
