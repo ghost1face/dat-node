@@ -12,26 +12,26 @@ const query = "SELECT name FROM sys.databases";
 //     console.log(`print: ${e.message.substr(e.message.lastIndexOf(']') + 1)}`)
 // })
 sql.open(connectionString, (err, conn) => {
-    if (err) {
-        throw err;
-    }
-    let x = 1;
-    if (err) {
-        throw err;
-    }
+   if (err) {
+      throw err;
+   }
+   let x = 1;
+   if (err) {
+      throw err;
+   }
 
-    // setInterval(() => {
-        let q = conn.query(`SET STATISTICS TIME ON; SET STATISTICS IO ON; SELECT * FROM dbo.Users`,
-            (err, results, more) => {
-                // if (more && !err && results && results.length === 0) {
-                //     return;
-                // }
-                // console.log(`[${x}] more = ${more} err ${err} results ${JSON.stringify(results)}`);
-                // if (more) return;
-                // ++x;
-            });
-        q.on('info', (e) => {
-            console.log(`print: ${e.message.substr(e.message.lastIndexOf(']') + 1)}`)
-        })
-    // }, 100);
+   // setInterval(() => {
+   let q = conn.query(`SET STATISTICS TIME ON; SET STATISTICS IO ON; SELECT * FROM dbo.Users`,
+      (err, results, more) => {
+         // if (more && !err && results && results.length === 0) {
+         //     return;
+         // }
+         // console.log(`[${x}] more = ${more} err ${err} results ${JSON.stringify(results)}`);
+         // if (more) return;
+         // ++x;
+      });
+   q.on('info', (e) => {
+      console.log(`print: ${e.message.substr(e.message.lastIndexOf(']') + 1)}`)
+   })
+   // }, 100);
 });

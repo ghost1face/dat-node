@@ -1,7 +1,9 @@
 {
-    "iterations": 5,
-    "connectionSettings": "Server=.;Database=SampleDB;Trusted_Connection=yes",
-    "tests": [{
-        "query": "SELECT TOP 100 * FROM dbo.Users"
-    }]
+   "iterations": 5,
+   "connectionSettings": "Server=localhost,1433;Database=TestDB;UID=sa;Pwd=W3D01NDAT4SH0!;",
+   "tests": [
+      {
+         "query": "SELECT TOP 100 * FROM dbo.Users"
+      }
+   ]
 }
